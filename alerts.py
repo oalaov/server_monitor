@@ -4,6 +4,8 @@ import psutil
 import threading
 import os
 import subprocess
+import keyboard
+import ctypes
 from telebot import types
 
 # --- НАСТРОЙКИ ---
@@ -50,6 +52,10 @@ def send_notification(message):
             print(f"Ошибка бота при отправке: {e}")
     else:
         print("Алерт пропущен (защита от спама)")
+
+# --- БЛОКИРОВКА СЕРВЕРА ---
+def lock_screen():
+    ctypes.windll.user32.LockWorkStation()
 
 # --- ФУНКЦИЯ ПИНГА ---
 def get_ping_result(host="8.8.8.8"):
@@ -112,9 +118,10 @@ def get_main_keyboard():
     btn_status = types.KeyboardButton("📊 Текущий статус")
     btn_menu = types.KeyboardButton("⚙️ Меню")
     btn_help = types.KeyboardButton("❓ Помощь")
-    btn_ping = types.KeyboardButton("🛜Пинг (До google.com)")
+    btn_ping = types.KeyboardButton("🛜 Пинг (До google.com)")
+    btn_lock = types.KeyboardButton("🔒 Заблокировать сервер")
     btn_kill = types.KeyboardButton("❌ Выключить сервер")
-    markup.add(btn_status, btn_help, btn_kill, btn_ping, btn_menu)
+    markup.add(btn_status, btn_help, btn_kill, btn_ping, btn_menu, btn_lock)
     return markup
 
 # Теперь используем обработчик ТЕКСТА
@@ -140,6 +147,10 @@ def handle_messages(message):
 
     elif message.text == "⚙️ Меню":
         bot.send_message(message.chat.id, "Меню:", reply_markup=get_menu_keyboard())
+
+    elif message.text == "🔒 Заблокировать сервер":
+        lock_screen()
+        bot.send_message(message.chat.id, "Сервер заблокирован (Win + L)")
     
 
 # --- ФОНОВЫЙ ЗАПУСК (МНОГОПОТОЧНОСТЬ) ---

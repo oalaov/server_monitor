@@ -30,8 +30,8 @@ cd server_monitor
 
 ### 2. В файле alerts.py замени токен бота и chat id на свой
 ```python
-TOKEN = "8775232211:AAEXIUkYXDPzk1XkYRoT_6CKK48kxRJ2TAI"
-CHAT_ID = "7926748416"
+TOKEN = "ТВОЙ:ТОКЕН"
+CHAT_ID = "ТВОЙCHATID"
 ```
 
 ### 3. Запусти одной командой 

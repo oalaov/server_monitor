@@ -1,0 +1,3 @@
+pyTelegramBotAPI
+psutil
+keyboard

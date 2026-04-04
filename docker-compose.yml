@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./web
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DB_PATH=/app/data/server_monitor.db
+    restart: unless-stopped
+
+  bot:
+    build: ./bot
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DB_PATH=/app/data/server_monitor.db
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    restart: unless-stopped

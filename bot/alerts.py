@@ -154,9 +154,10 @@ def handle_messages(message):
     
 
 # --- ФОНОВЫЙ ЗАПУСК (МНОГОПОТОЧНОСТЬ) ---
-def start_bot():
-    thread = threading.Thread(target=bot.polling, kwargs={"none_stop": True}, daemon=True)
-    thread.start()
-    print("Бот успешно запущен в фоновом потоке.")
 
-start_bot()
+thread = threading.Thread(target=bot.infinity_polling, kwargs={"none_stop": True})
+thread.start()
+print("Бот успешно запущен в фоновом потоке.")
+
+while True:
+    time.sleep(1)

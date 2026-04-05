@@ -14,7 +14,6 @@ Python script for server monitoring with web interface and telegram control pane
 - 📈 Графики нагрузки (история до 20 точек)
 - ⚠️ Логирование алертов в базу данных
 - 🤖 Telegram-бот для удалённого управления и уведомлений
-- 🔒 Блокировка и выключение сервера через бота
 - 🐳 Готов к запуску в Docker
 
 ---
@@ -28,10 +27,10 @@ git clone https://github.com/твой-username/server_monitor.git
 cd server_monitor
 ```
 
-### 2. В файле alerts.py замени токен бота и chat id на свой
-```python
-TOKEN = "ТВОЙ:ТОКЕН"
-CHAT_ID = "ТВОЙCHATID"
+### 2. В файле .env замени токен бота и chat id на свой
+```bash
+TELEGRAM_BOT_TOKEN=ТВОЙ:ТОКЕН
+CHAT_ID=ТВОЙCHATID
 ```
 
 ### 3. Запусти одной командой 

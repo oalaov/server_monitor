@@ -8,17 +8,14 @@ import keyboard
 import ctypes
 from telebot import types
 
-# --- НАСТРОЙКИ ---
-# English: Your credentials
-TOKEN = "8775232211:AAEXIUkYXDPzk1XkYRoT_6CKK48kxRJ2TAI"
-CHAT_ID = "7926748416"
+#TOKEN AND CHAT ID
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID", "7926748416")
 
 bot = telebot.TeleBot(TOKEN)
 last_alert_time = 0 
 
-# --- ДАННЫЕ О БАТАРЕЕ И ТЕМПЕРАТУРАХ ---
 def get_hardware_health():
-    # 1. Проверка батареи
     battery = psutil.sensors_battery()
     if battery:
         percent = battery.percent
@@ -26,19 +23,8 @@ def get_hardware_health():
         battery_status = f"Заряд: {percent}% ({power_plugged})"
     else:
         battery_status = "Батарея не обнаружена"
-
-    # 2. Проверка температуры (может вернуть пустой список на Windows без спец. прав)
-    #temp_status = "Температура: "
-    #if temps and 'coretemp' in temps:
-        #core_temp = temps['coretemp'][0].current
-        #temp_status += f"{core_temp}°C"
-    #else:
-        # Если psutil не видит, пишем заглушку (особенность Windows)
-        #temp_status += "требуются права админа"
-
     return f"🔋 {battery_status}"
 
-# --- ЛОГИКА УВЕДОМЛЕНИЙ ---
 def send_notification(message):
     global last_alert_time
     current_time = time.time()
@@ -53,11 +39,9 @@ def send_notification(message):
     else:
         print("Алерт пропущен (защита от спама)")
 
-# --- БЛОКИРОВКА СЕРВЕРА ---
 def lock_screen():
     ctypes.windll.user32.LockWorkStation()
 
-# --- ФУНКЦИЯ ПИНГА ---
 def get_ping_result(host="8.8.8.8"):
     try:
         output = subprocess.check_output(f"ping -n 2 {host}", shell=True, stderr=subprocess.STDOUT)
@@ -66,7 +50,6 @@ def get_ping_result(host="8.8.8.8"):
     except Exception as e:
         return f"Ошибка связи: {e}"
 
-# --- ИНТЕРФЕЙС ТЕЛЕГРАМ ---
 def get_menu_keyboard():
     markup = types.InlineKeyboardMarkup()
 
@@ -94,7 +77,7 @@ def get_inline_keyboard():
 
 @bot.callback_query_handler(func=lambda call: True)
 def query_handler(call):
-    cpu = psutil.cpu_percent(interval=0.5) # Добавим интервал для точности
+    cpu = psutil.cpu_percent(interval=0.5) 
     ram = psutil.virtual_memory().available / (1024**3)
     hardware = get_hardware_health()
 
@@ -124,12 +107,11 @@ def get_main_keyboard():
     markup.add(btn_status, btn_help, btn_kill, btn_ping, btn_menu, btn_lock)
     return markup
 
-# Теперь используем обработчик ТЕКСТА
 @bot.message_handler(func=lambda message: True)
 def handle_messages(message):
     if message.text == "📊 Текущий статус":
 
-        cpu = psutil.cpu_percent(interval=0.5) # Добавим интервал для точности
+        cpu = psutil.cpu_percent(interval=0.5)
         ram = psutil.virtual_memory().available / (1024**3)
 
         
@@ -153,7 +135,6 @@ def handle_messages(message):
         bot.send_message(message.chat.id, "Сервер заблокирован (Win + L)")
     
 
-# --- ФОНОВЫЙ ЗАПУСК (МНОГОПОТОЧНОСТЬ) ---
 
 thread = threading.Thread(target=bot.infinity_polling, kwargs={"none_stop": True})
 thread.start()

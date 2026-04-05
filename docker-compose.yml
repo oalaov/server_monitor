@@ -18,5 +18,5 @@ services:
     environment:
       - DB_PATH=/app/data/server_monitor.db
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
-      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - CHAT_ID=${CHAT_ID}
     restart: unless-stopped

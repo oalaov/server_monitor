@@ -101,11 +101,22 @@ def get_main_keyboard():
     btn_status = types.KeyboardButton("📊 Текущий статус")
     btn_menu = types.KeyboardButton("⚙️ Меню")
     btn_help = types.KeyboardButton("❓ Помощь")
-    btn_ping = types.KeyboardButton("🛜 Пинг (До google.com)")
-    btn_lock = types.KeyboardButton("🔒 Заблокировать сервер")
-    btn_kill = types.KeyboardButton("❌ Выключить сервер")
-    markup.add(btn_status, btn_help, btn_kill, btn_ping, btn_menu, btn_lock)
+    #btn_ping = types.KeyboardButton("🛜 Пинг (До google.com)")
+    #btn_lock = types.KeyboardButton("🔒 Заблокировать сервер")
+    #btn_kill = types.KeyboardButton("❌ Выключить сервер")
+    markup.add(btn_status, btn_help, btn_menu)
     return markup
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(
+        message, 
+        "👋 Привет! Я бот для мониторинга сервера.\n\n"
+        "📊 Нажми 'Текущий статус' чтобы увидеть CPU и RAM\n"
+        "❓ Помощь — подсказки\n"
+        "⚙️ Меню — другие функции",
+        reply_markup=get_main_keyboard()
+    )
 
 @bot.message_handler(func=lambda message: True)
 def handle_messages(message):

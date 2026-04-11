@@ -20,8 +20,7 @@
 ### 1. Клонируй репозиторий
 
 ```bash
-git clone https://github.com/твой-username/server_monitor.git
-cd server_monitor
+git clone https://github.com/твой-username/server_monitor.git && cd server_monitor
 ```
 
 ### 2. В файле .env замени токен бота и chat id на свой

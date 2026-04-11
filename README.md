@@ -1,11 +1,8 @@
-Python script for server monitoring with web interface and telegram control panel.
+
 
 # Server Monitor
 
 Система мониторинга сервера с веб-интерфейсом и Telegram-ботом.
-
-**Стек:** Python, Flask, Bootstrap, SQLite, Docker, Telegram Bot API, psutil.
-
 ---
 
 ## Возможности

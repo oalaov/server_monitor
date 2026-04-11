@@ -23,7 +23,7 @@
 git clone https://github.com/твой-username/server_monitor.git && cd server_monitor
 ```
 
-### 2. В файле .env замени токен бота и chat id на свой
+### 2. Создай файл .env с текстом ниже и замени токен бота и chat id на свой
 ```bash
 TELEGRAM_BOT_TOKEN=ТВОЙ:ТОКЕН
 CHAT_ID=ТВОЙCHATID

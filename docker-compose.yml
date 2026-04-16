@@ -6,8 +6,10 @@ services:
     ports:
       - "5000:5000"
     volumes:
+      - /proc:/host/proc:ro
       - ./data:/app/data
     environment:
+      - HOST_PROC=/host/proc
       - DB_PATH=/app/data/server_monitor.db
     restart: unless-stopped
 
@@ -15,7 +17,9 @@ services:
     build: ./bot
     volumes:
       - ./data:/app/data
+      - /proc:/host/proc:ro
     environment:
+      - HOST_PROC=/host/proc
       - DB_PATH=/app/data/server_monitor.db
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - CHAT_ID=${CHAT_ID}

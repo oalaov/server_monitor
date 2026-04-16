@@ -20,7 +20,7 @@
 ### 1. Клонируй репозиторий
 
  ```bash
- git clone https://github.com/твой-username/server_monitor.git && cd server_monitor
+ git clone https://github.com/oalaov/server_monitor.git && cd server_monitor
  ```
 
 ### 2. Создай файл .env с текстом ниже и замени токен бота и chat id на свой
@@ -31,8 +31,8 @@
 
 ### 3. Установи node exporter 
 
- Windows: https://github.com/prometheus-community/windows_exporter
- Linux/macOS https://prometheus.io/download/#node_exporter 
+ - Windows: https://github.com/prometheus-community/windows_exporter
+ - Linux/macOS https://prometheus.io/download/#node_exporter 
 
 
 ### 4. Запусти одной командой 

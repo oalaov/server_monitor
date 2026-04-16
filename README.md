@@ -4,7 +4,9 @@
 
 Система мониторинга сервера с веб-интерфейсом и Telegram-ботом.
 ---
-https://github.com/oalaov/server_monitor/blob/main/screenshots/web_screenshot.png
+![Дашборд мониторинга](screenshots/web_screenshot.png)
+
+*Веб-интерфейс с графиками CPU/RAM/диска*
 
 ## Возможности
 

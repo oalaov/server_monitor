@@ -29,12 +29,18 @@ TELEGRAM_BOT_TOKEN=ТВОЙ:ТОКЕН
 CHAT_ID=ТВОЙCHATID
 ```
 
-### 3. Запусти одной командой 
+### 3. Установи node exporter 
+
+# Windows: https://github.com/prometheus-community/windows_exporter
+# Linux/macOS https://prometheus.io/download/#node_exporter 
+
+
+### 4. Запусти одной командой 
 ```bash
 docker-compose up -d
 ```
 
-### 4. Телеграм бот и веб
+### 5. Телеграм бот и веб
 1. Открой своего бота и отправь /start
 2. Открой в браузере
  

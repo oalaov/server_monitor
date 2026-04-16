@@ -4,6 +4,7 @@
 
 Система мониторинга сервера с веб-интерфейсом и Telegram-ботом.
 ---
+https://github.com/oalaov/server_monitor/blob/main/screenshots/web_screenshot.png
 
 ## Возможности
 

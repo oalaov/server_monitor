@@ -1,20 +1,17 @@
-Python script for server monitoring with web interface and telegram control panel.
+
 
 # Server Monitor
 
 Система мониторинга сервера с веб-интерфейсом и Telegram-ботом.
-
-**Стек:** Python, Flask, Bootstrap, SQLite, Docker, Telegram Bot API, psutil.
-
 ---
 
 ## Возможности
 
-- 📊 Мониторинг CPU, RAM, диска в реальном времени
-- 📈 Графики нагрузки (история до 20 точек)
-- ⚠️ Логирование алертов в базу данных
-- 🤖 Telegram-бот для удалённого управления и уведомлений
-- 🐳 Готов к запуску в Docker
+- Мониторинг CPU, RAM, диска в реальном времени
+- Графики нагрузки (история до 20 точек)
+- Логирование алертов в базу данных
+- Telegram-бот для удалённого управления и уведомлений
+- Готов к запуску в Docker
 
 ---
 
@@ -23,11 +20,10 @@ Python script for server monitoring with web interface and telegram control pane
 ### 1. Клонируй репозиторий
 
 ```bash
-git clone https://github.com/твой-username/server_monitor.git
-cd server_monitor
+git clone https://github.com/твой-username/server_monitor.git && cd server_monitor
 ```
 
-### 2. В файле .env замени токен бота и chat id на свой
+### 2. Создай файл .env с текстом ниже и замени токен бота и chat id на свой
 ```bash
 TELEGRAM_BOT_TOKEN=ТВОЙ:ТОКЕН
 CHAT_ID=ТВОЙCHATID

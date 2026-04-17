@@ -32,18 +32,24 @@
  CHAT_ID=ТВОЙCHATID
  ```
 
-### 3. Установи node exporter 
+### 3. Установи Docker 
+
+- Windows: https://docs.docker.com/desktop/setup/install/windows-install/
+- macOS: https://docs.docker.com/desktop/setup/install/mac-install/
+- Linux: https://docs.docker.com/desktop/setup/install/linux/
+
+### 4. Установи node exporter 
 
  - Windows: https://github.com/prometheus-community/windows_exporter
  - Linux/macOS https://prometheus.io/download/#node_exporter 
 
 
-### 4. Запусти одной командой 
+### 5. Запусти одной командой 
  ```bash
  docker-compose up -d
  ```
 
-### 5. Телеграм бот и веб
+### 6. Телеграм бот и веб
  1. Открой своего бота и отправь /start
  2. Открой в браузере
  

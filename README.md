@@ -56,4 +56,3 @@
  ```bash
  http://localhost:5000
  
-</details>

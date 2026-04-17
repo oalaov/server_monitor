@@ -17,8 +17,8 @@
  - Готов к запуску в Docker
 
  ---
-
-## Быстрый старт (Docker)
+<details>
+<summary> Быстрый старт (Docker) </summary>
 
 ### 1. Клонируй репозиторий
 
@@ -55,3 +55,5 @@
  
  ```bash
  http://localhost:5000
+ 
+</details>

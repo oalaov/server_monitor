@@ -1,4 +1,5 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, session, redirect, url_for, request
+from functools import wraps
 import psutil
 import sqlite3
 from datetime import datetime
@@ -7,13 +8,48 @@ import requests
 import threading
 import time
 
+app = Flask(__name__)
+
+
+app.secret_key = os.environ.get('SECRET_KEY', 'supersecretkey')
+
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'monitor123')
+
+
 cpu_prev = {}
 cpu_prev_time = None
 CPU_CORES = None
 
-app = Flask(__name__)
-
 DB_PATH = os.environ.get('DB_PATH', 'server_monitor.db')
+
+def login_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if not session.get('logged_in'):
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session['logged_in'] = True
+            return redirect(url_for('dashboard'))
+        else:
+            error = 'Неверный логин или пароль'
+    
+    return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('login'))
 
 def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
@@ -167,10 +203,12 @@ def get_disk_from_windows_exporter():
         return None
 
 @app.route('/')
+@login_required
 def dashboard():
     return render_template('dashboard.html')
 
 @app.route('/api/metrics')
+@login_required
 def get_metrics():
     cpu_percent = get_cpu_from_windows_exporter()
     ram_percent = get_ram_from_windows_exporter()

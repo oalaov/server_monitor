@@ -1,11 +1,15 @@
 # Python
 __pycache__/
+__pycache__
 *.py[cod]
 *.so
 .Python
 .env
 venv/
 env/
+
+#data
+data/server_monitor.db
 
 # IDE
 .vscode/

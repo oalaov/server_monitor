@@ -18,7 +18,7 @@
 
  ---
 <details>
-<summary> # Быстрый старт (Docker) </summary>
+<summary> Быстрый старт (Docker) </summary>
 
 ### 1. Клонируй репозиторий
 

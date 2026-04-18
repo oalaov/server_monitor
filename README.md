@@ -26,10 +26,12 @@
  git clone https://github.com/oalaov/server_monitor.git && cd server_monitor
  ```
 
-### 2. Создай файл .env с текстом ниже и замени токен бота и chat id на свой
+### 2. Создай файл .env с текстом ниже и замени токен бота, chat id, имя пользователя и пароль от веба на нужные
  ```bash
  TELEGRAM_BOT_TOKEN=ТВОЙ:ТОКЕН
  CHAT_ID=ТВОЙCHATID
+ ADMIN_USERNAME=ИМЯ_ПОЛЬЗОВАТЕЛЯ
+ ADMIN_PASSWORD=ПАРОЛЬ
  ```
 
 ### 3. Установи Docker 

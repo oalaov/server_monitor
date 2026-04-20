@@ -23,7 +23,6 @@
     <div class="container mt-4">
         <h1 class="mb-4">📊 Server Monitor</h1>
         
-        <!-- Карточки с метриками -->
         <div class="row mb-4">
             <div class="col-md-3">
                 <div class="card metric-card bg-primary text-white">
@@ -59,7 +58,6 @@
             </div>
         </div>
 
-        <!-- Графики -->
         <div class="row mb-4">
             <div class="col-md-6">
                 <div class="card">
@@ -83,7 +81,6 @@
             </div>
         </div>
 
-        <!-- Таблица алертов -->
         <div class="card">
             <div class="card-header">
                 <h5>⚠️ Recent Alerts</h5>
@@ -110,13 +107,11 @@
     </div>
 
     <script>
-        // Переменные для графиков
         let cpuData = [];
         let ramData = [];
         let timeLabels = [];
         let maxDataPoints = 20;
 
-        // Инициализация графиков
         const ctxCpu = document.getElementById('cpuChart').getContext('2d');
         const ctxRam = document.getElementById('ramChart').getContext('2d');
         
@@ -146,37 +141,31 @@
             }
         });
 
-        // Функция обновления метрик
         async function updateMetrics() {
             try {
                 const response = await fetch('/api/metrics');
                 const data = await response.json();
                 
-                // Обновляем цифры
                 document.getElementById('cpu').textContent = data.cpu + '%';
                 document.getElementById('ram').textContent = data.ram + '%';
                 document.getElementById('disk').textContent = data.disk + '%';
                 document.getElementById('last-update').textContent = data.time;
                 
-                // Меняем цвет при критических значениях
                 const cpuElem = document.getElementById('cpu');
                 if (data.cpu > 80) cpuElem.className = 'display-4 critical';
                 else if (data.cpu > 60) cpuElem.className = 'display-4 warning';
                 else cpuElem.className = 'display-4 normal';
                 
-                // Добавляем данные в графики
                 cpuData.push(data.cpu);
                 ramData.push(data.ram);
                 timeLabels.push(data.time);
                 
-                // Оставляем только последние 20 точек
                 if (cpuData.length > maxDataPoints) {
                     cpuData.shift();
                     ramData.shift();
                     timeLabels.shift();
                 }
                 
-                // Обновляем графики
                 cpuChart.update();
                 ramChart.update();
                 
@@ -185,7 +174,6 @@
             }
         }
 
-        // Функция обновления алертов
         async function updateAlerts() {
             try {
                 const response = await fetch('/api/alerts');
@@ -214,7 +202,6 @@
             }
         }
 
-        // Обновляем данные каждые 5 секунд
         updateMetrics();
         updateAlerts();
         setInterval(updateMetrics, 1000);

@@ -15,6 +15,8 @@ CHAT_ID = os.getenv("CHAT_ID", "7926748416")
 bot = telebot.TeleBot(TOKEN)
 last_alert_time = 0 
 
+
+
 def get_hardware_health():
     battery = psutil.sensors_battery()
     if battery:
@@ -120,30 +122,33 @@ def send_welcome(message):
 
 @bot.message_handler(func=lambda message: True)
 def handle_messages(message):
-    if message.text == "📊 Текущий статус":
+    if message.chat.id != CHAT_ID:
+            bot.reply_to(message, "⛔ Нет прав.")
+    else:
+        if message.text == "📊 Текущий статус":
 
-        cpu = psutil.cpu_percent(interval=0.5)
-        ram = psutil.virtual_memory().available / (1024**3)
+            cpu = psutil.cpu_percent(interval=0.5)
+            ram = psutil.virtual_memory().available / (1024**3)
 
         
-        status_text = f"✅ Данные с сервера:\nCPU: {cpu}%\nRAM доступно: {ram:.2f} GB"
-        bot.send_message(message.chat.id, status_text, reply_markup=get_hardware_keyboard())
+            status_text = f"✅ Данные с сервера:\nCPU: {cpu}%\nRAM доступно: {ram:.2f} GB"
+            bot.send_message(message.chat.id, status_text, reply_markup=get_hardware_keyboard())
     
-    elif message.text == "❓ Помощь":
-        bot.send_message(message.chat.id, "Бот мониторит CPU и RAM твоего сервера. Нажимай кнопки внизу экрана!")
+        elif message.text == "❓ Помощь":
+            bot.send_message(message.chat.id, "Бот мониторит CPU и RAM твоего сервера. Нажимай кнопки внизу экрана!")
     
-    elif message.text == "❌ Выключить сервер":
-        bot.send_message(message.chat.id, "Вы точно хотите выключить сервер?", reply_markup=get_inline_keyboard())
+        elif message.text == "❌ Выключить сервер":
+            bot.send_message(message.chat.id, "Вы точно хотите выключить сервер?", reply_markup=get_inline_keyboard())
 
-    elif message.text == "🛜Пинг (До google.com)":
-        bot.send_message(message.chat.id, get_ping_result())
+        elif message.text == "🛜Пинг (До google.com)":
+            bot.send_message(message.chat.id, get_ping_result())
 
-    elif message.text == "⚙️ Меню":
-        bot.send_message(message.chat.id, "Меню:", reply_markup=get_menu_keyboard())
+        elif message.text == "⚙️ Меню":
+            bot.send_message(message.chat.id, "Меню:", reply_markup=get_menu_keyboard())
 
-    elif message.text == "🔒 Заблокировать сервер":
-        lock_screen()
-        bot.send_message(message.chat.id, "Сервер заблокирован (Win + L)")
+        elif message.text == "🔒 Заблокировать сервер":
+            lock_screen()
+            bot.send_message(message.chat.id, "Сервер заблокирован (Win + L)")
     
 
 

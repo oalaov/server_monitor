@@ -13,5 +13,5 @@ COPY alerts.py .
 
 RUN mkdir -p /app/data
 
-# Запускаем бота (вызываем функцию run из alerts.py)
+
 CMD ["python", "-c", "from alerts import run; run()"]

@@ -8,6 +8,8 @@ services:
     volumes:
       - /proc:/host/proc:ro
       - ./data:/app/data
+    env_file:
+      - .env
     environment:
       - HOST_PROC=/host/proc
       - DB_PATH=/app/data/server_monitor.db

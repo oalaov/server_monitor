@@ -2,3 +2,4 @@ Flask
 psutil
 requests
 flask-login
+dotenv

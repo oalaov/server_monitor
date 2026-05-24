@@ -251,9 +251,9 @@ def test_alert():
 
 
 def check_metrics_and_alert():
-    CPU_THRESHOLD = 30   # 30%
-    RAM_THRESHOLD = 50   # 50%
-    DISK_THRESHOLD = 70  # 70%
+    CPU_THRESHOLD = 80   # 30%
+    RAM_THRESHOLD = 80   # 50%
+    DISK_THRESHOLD = 90  # 70%
     
     last_alert = {'cpu': 0, 'ram': 0, 'disk': 0}
     
